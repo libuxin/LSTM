@@ -1,0 +1,45 @@
+###########################
+##########文件介绍#########
+###########################
+df_fea.pkl 特征文件
+***dl_text.txt 未分词训练文本
+dl_text_r.txt 分词后训练文本
+dsjyycxds_preliminary.txt 结果集
+***LSTM.ipynb 代码文件
+***Preliminary-texting.csv 测试集
+result.txt 概率结果集
+simple_lstm_w2v_vectors_0.25_0.25 最优网格权重
+***training-inspur.csv 训练集
+Word300.model w2v向量模型
+
+***表示必须文件
+
+############################
+##########复现说明##########
+############################
+本小组应用IDE的是Anaconda中的Jupyter Notebook
+下载地址：https://www.anaconda.com/download/
+版本为Anaconda3，Python版本为3.5/3.6
+
+TIP：Anaconda有大量内置的包
+     故以下为我后来回忆认为需要添加的
+     有则不补，少则补齐。
+
+需要添加的工具包有：
+jieba、Keras、numpy、pandas、
+word2vec、Tensorflow、gensim
+版本皆为新版本
+如果缺少报错请按提示补包升包等操作
+
+#############################
+###########复现步骤##########
+#############################
+解压文件
+运行Anaconda中的Jupyter Notebook
+找到文件夹下的LSTM.ipynb 
+运行得到dsjyycxds_preliminary.txt
+
+
+联系方式：1282803191@qq.com
+
+

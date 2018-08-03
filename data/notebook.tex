@@ -1,0 +1,728 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{LSTM}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{k+kn}{import} \PY{n+nn}{os}
+        \PY{k+kn}{import} \PY{n+nn}{re}
+        \PY{k+kn}{import} \PY{n+nn}{csv}
+        \PY{k+kn}{import} \PY{n+nn}{sys}
+        \PY{k+kn}{import} \PY{n+nn}{jieba}
+        \PY{k+kn}{import} \PY{n+nn}{pickle}
+        \PY{k+kn}{import} \PY{n+nn}{codecs}
+        \PY{k+kn}{import} \PY{n+nn}{gensim}
+        \PY{k+kn}{import} \PY{n+nn}{logging}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{seed}\PY{p}{(}\PY{l+m+mi}{2018}\PY{p}{)}
+        \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd} 
+        \PY{k+kn}{from} \PY{n+nn}{keras} \PY{k}{import} \PY{n}{backend} \PY{k}{as} \PY{n}{K}
+        \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{models} \PY{k}{import} \PY{n}{Model}
+        \PY{k+kn}{from} \PY{n+nn}{string} \PY{k}{import} \PY{n}{punctuation}
+        \PY{k+kn}{from} \PY{n+nn}{gensim}\PY{n+nn}{.}\PY{n+nn}{models} \PY{k}{import} \PY{n}{word2vec}
+        \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{models} \PY{k}{import} \PY{n}{Sequential}
+        \PY{k+kn}{from} \PY{n+nn}{gensim}\PY{n+nn}{.}\PY{n+nn}{models} \PY{k}{import} \PY{n}{KeyedVectors}
+        \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{engine}\PY{n+nn}{.}\PY{n+nn}{topology} \PY{k}{import} \PY{n}{Layer}
+        \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{layers}\PY{n+nn}{.}\PY{n+nn}{merge} \PY{k}{import} \PY{n}{concatenate}
+        \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{preprocessing} \PY{k}{import} \PY{n}{text}\PY{p}{,} \PY{n}{sequence}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection} \PY{k}{import} \PY{n}{train\PYZus{}test\PYZus{}split}
+        \PY{k+kn}{from} \PY{n+nn}{keras} \PY{k}{import} \PY{n}{initializers}\PY{p}{,} \PY{n}{regularizers}\PY{p}{,} \PY{n}{constraints}
+        \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{layers}\PY{n+nn}{.}\PY{n+nn}{normalization} \PY{k}{import} \PY{n}{BatchNormalization}
+        \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{callbacks} \PY{k}{import} \PY{n}{EarlyStopping}\PY{p}{,} \PY{n}{ModelCheckpoint}
+        \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{layers} \PY{k}{import} \PY{n}{Dense}\PY{p}{,} \PY{n}{Input}\PY{p}{,} \PY{n}{LSTM}\PY{p}{,} \PY{n}{Embedding}\PY{p}{,} \PY{n}{Dropout}\PY{p}{,} \PY{n}{Activation}
+        
+        
+        \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+        \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}Attention类定义\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+        \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+        \PY{k}{class} \PY{n+nc}{Attention}\PY{p}{(}\PY{n}{Layer}\PY{p}{)}\PY{p}{:}
+            \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{step\PYZus{}dim}\PY{p}{,}
+                         \PY{n}{W\PYZus{}regularizer}\PY{o}{=}\PY{k+kc}{None}\PY{p}{,} \PY{n}{b\PYZus{}regularizer}\PY{o}{=}\PY{k+kc}{None}\PY{p}{,}
+                         \PY{n}{W\PYZus{}constraint}\PY{o}{=}\PY{k+kc}{None}\PY{p}{,} \PY{n}{b\PYZus{}constraint}\PY{o}{=}\PY{k+kc}{None}\PY{p}{,}
+                         \PY{n}{bias}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{o}{*}\PY{o}{*}\PY{n}{kwargs}\PY{p}{)}\PY{p}{:}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{supports\PYZus{}masking} \PY{o}{=} \PY{k+kc}{True}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{init} \PY{o}{=} \PY{n}{initializers}\PY{o}{.}\PY{n}{get}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{glorot\PYZus{}uniform}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{W\PYZus{}regularizer} \PY{o}{=} \PY{n}{regularizers}\PY{o}{.}\PY{n}{get}\PY{p}{(}\PY{n}{W\PYZus{}regularizer}\PY{p}{)}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{b\PYZus{}regularizer} \PY{o}{=} \PY{n}{regularizers}\PY{o}{.}\PY{n}{get}\PY{p}{(}\PY{n}{b\PYZus{}regularizer}\PY{p}{)}
+        
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{W\PYZus{}constraint} \PY{o}{=} \PY{n}{constraints}\PY{o}{.}\PY{n}{get}\PY{p}{(}\PY{n}{W\PYZus{}constraint}\PY{p}{)}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{b\PYZus{}constraint} \PY{o}{=} \PY{n}{constraints}\PY{o}{.}\PY{n}{get}\PY{p}{(}\PY{n}{b\PYZus{}constraint}\PY{p}{)}
+        
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{bias} \PY{o}{=} \PY{n}{bias}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{step\PYZus{}dim} \PY{o}{=} \PY{n}{step\PYZus{}dim}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{features\PYZus{}dim} \PY{o}{=} \PY{l+m+mi}{0}
+                \PY{n+nb}{super}\PY{p}{(}\PY{n}{Attention}\PY{p}{,} \PY{n+nb+bp}{self}\PY{p}{)}\PY{o}{.}\PY{n+nf+fm}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{o}{*}\PY{o}{*}\PY{n}{kwargs}\PY{p}{)}
+        
+            \PY{k}{def} \PY{n+nf}{build}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{input\PYZus{}shape}\PY{p}{)}\PY{p}{:}
+                \PY{k}{assert} \PY{n+nb}{len}\PY{p}{(}\PY{n}{input\PYZus{}shape}\PY{p}{)} \PY{o}{==} \PY{l+m+mi}{3}
+        
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{W} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{add\PYZus{}weight}\PY{p}{(}\PY{p}{(}\PY{n}{input\PYZus{}shape}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{p}{)}\PY{p}{,}
+                                         \PY{n}{initializer}\PY{o}{=}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{init}\PY{p}{,}
+                                         \PY{n}{name}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{\PYZus{}W}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{name}\PY{p}{)}\PY{p}{,}
+                                         \PY{n}{regularizer}\PY{o}{=}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{W\PYZus{}regularizer}\PY{p}{,}
+                                         \PY{n}{constraint}\PY{o}{=}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{W\PYZus{}constraint}\PY{p}{)}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{features\PYZus{}dim} \PY{o}{=} \PY{n}{input\PYZus{}shape}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}
+        
+                \PY{k}{if} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{bias}\PY{p}{:}
+                    \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{b} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{add\PYZus{}weight}\PY{p}{(}\PY{p}{(}\PY{n}{input\PYZus{}shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{p}{)}\PY{p}{,}
+                                             \PY{n}{initializer}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{zero}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                             \PY{n}{name}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{\PYZus{}b}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{name}\PY{p}{)}\PY{p}{,}
+                                             \PY{n}{regularizer}\PY{o}{=}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{b\PYZus{}regularizer}\PY{p}{,}
+                                             \PY{n}{constraint}\PY{o}{=}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{b\PYZus{}constraint}\PY{p}{)}
+                \PY{k}{else}\PY{p}{:}
+                    \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{b} \PY{o}{=} \PY{k+kc}{None}
+        
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{built} \PY{o}{=} \PY{k+kc}{True}
+        
+            \PY{k}{def} \PY{n+nf}{compute\PYZus{}mask}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n+nb}{input}\PY{p}{,} \PY{n}{input\PYZus{}mask}\PY{o}{=}\PY{k+kc}{None}\PY{p}{)}\PY{p}{:}
+                \PY{c+c1}{\PYZsh{} do not pass the mask to the next layers}
+                \PY{k}{return} \PY{k+kc}{None}
+        
+            \PY{k}{def} \PY{n+nf}{call}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{x}\PY{p}{,} \PY{n}{mask}\PY{o}{=}\PY{k+kc}{None}\PY{p}{)}\PY{p}{:}
+        
+                \PY{n}{features\PYZus{}dim} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{features\PYZus{}dim}
+                \PY{n}{step\PYZus{}dim} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{step\PYZus{}dim}
+        
+                \PY{n}{eij} \PY{o}{=} \PY{n}{K}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{K}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{K}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{features\PYZus{}dim}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{K}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{W}\PY{p}{,} \PY{p}{(}\PY{n}{features\PYZus{}dim}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{step\PYZus{}dim}\PY{p}{)}\PY{p}{)}
+        
+                \PY{k}{if} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{bias}\PY{p}{:}
+                    \PY{n}{eij} \PY{o}{+}\PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{b}
+        
+                \PY{n}{eij} \PY{o}{=} \PY{n}{K}\PY{o}{.}\PY{n}{tanh}\PY{p}{(}\PY{n}{eij}\PY{p}{)}
+        
+                \PY{n}{a} \PY{o}{=} \PY{n}{K}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{n}{eij}\PY{p}{)}
+        
+                \PY{c+c1}{\PYZsh{} apply mask after the exp. will be re\PYZhy{}normalized next}
+                \PY{k}{if} \PY{n}{mask} \PY{o+ow}{is} \PY{o+ow}{not} \PY{k+kc}{None}\PY{p}{:}
+                    \PY{c+c1}{\PYZsh{} Cast the mask to floatX to avoid float64 upcasting in theano}
+                    \PY{n}{a} \PY{o}{*}\PY{o}{=} \PY{n}{K}\PY{o}{.}\PY{n}{cast}\PY{p}{(}\PY{n}{mask}\PY{p}{,} \PY{n}{K}\PY{o}{.}\PY{n}{floatx}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+        
+                \PY{c+c1}{\PYZsh{} in some cases especially in the early stages of training the sum may be almost zero}
+                \PY{n}{a} \PY{o}{/}\PY{o}{=} \PY{n}{K}\PY{o}{.}\PY{n}{cast}\PY{p}{(}\PY{n}{K}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{a}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{keepdims}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)} \PY{o}{+} \PY{n}{K}\PY{o}{.}\PY{n}{epsilon}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{K}\PY{o}{.}\PY{n}{floatx}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+        
+                \PY{n}{a} \PY{o}{=} \PY{n}{K}\PY{o}{.}\PY{n}{expand\PYZus{}dims}\PY{p}{(}\PY{n}{a}\PY{p}{)}
+                \PY{n}{weighted\PYZus{}input} \PY{o}{=} \PY{n}{x} \PY{o}{*} \PY{n}{a}
+            \PY{c+c1}{\PYZsh{}print weigthted\PYZus{}input.shape}
+                \PY{k}{return} \PY{n}{K}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{weighted\PYZus{}input}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+        
+            \PY{k}{def} \PY{n+nf}{compute\PYZus{}output\PYZus{}shape}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{input\PYZus{}shape}\PY{p}{)}\PY{p}{:}
+                \PY{c+c1}{\PYZsh{}return input\PYZus{}shape[0], input\PYZus{}shape[\PYZhy{}1]}
+                \PY{k}{return} \PY{n}{input\PYZus{}shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{features\PYZus{}dim}
+            
+        \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+        \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}函数集合\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+        \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+        
+        \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}结巴分词}
+        \PY{k}{def} \PY{n+nf}{cuttxt}\PY{p}{(}\PY{n}{train\PYZus{}file\PYZus{}name}\PY{p}{)}\PY{p}{:}
+            \PY{n}{f1} \PY{o}{=} \PY{n+nb}{open}\PY{p}{(}\PY{n}{cut\PYZus{}txt}\PY{p}{,}\PY{n}{encoding}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{utf\PYZhy{}8}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+            \PY{n}{f2}\PY{o}{=} \PY{n+nb}{open}\PY{p}{(}\PY{n}{cut\PYZus{}txt\PYZus{}r}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{w}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{encoding}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{utf\PYZhy{}8}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+            \PY{n}{lines} \PY{o}{=} \PY{n}{f1}\PY{o}{.}\PY{n}{readlines}\PY{p}{(}\PY{p}{)}
+            \PY{k}{for} \PY{n}{line} \PY{o+ow}{in} \PY{n}{lines}\PY{p}{:}
+                \PY{n}{line}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}t}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                \PY{n}{seg\PYZus{}list}\PY{o}{=}\PY{n}{jieba}\PY{o}{.}\PY{n}{cut}\PY{p}{(}\PY{n}{line}\PY{p}{,}\PY{n}{cut\PYZus{}all}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+                \PY{n}{f2}\PY{o}{.}\PY{n}{write}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ }\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{seg\PYZus{}list}\PY{p}{)}\PY{p}{)}
+            \PY{n}{f1}\PY{o}{.}\PY{n}{close}\PY{p}{(}\PY{p}{)}
+            \PY{n}{f2}\PY{o}{.}\PY{n}{close}\PY{p}{(}\PY{p}{)}
+            \PY{k}{return} \PY{n}{cut\PYZus{}txt\PYZus{}r}
+        
+        \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}word2vec模型训练}
+        \PY{k}{def} \PY{n+nf}{model\PYZus{}train}\PY{p}{(}\PY{n}{train\PYZus{}file\PYZus{}name}\PY{p}{,} \PY{n}{save\PYZus{}model\PYZus{}file}\PY{p}{,}\PY{n}{n\PYZus{}dim}\PY{p}{)}\PY{p}{:}  \PY{c+c1}{\PYZsh{} model\PYZus{}file\PYZus{}name为训练语料的路径,save\PYZus{}model为保存模型名}
+            \PY{c+c1}{\PYZsh{} 模型训练，生成词向量}
+            \PY{n}{logging}\PY{o}{.}\PY{n}{basicConfig}\PY{p}{(}\PY{n+nb}{format}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZpc{}(asctime)s}\PY{l+s+s1}{ : }\PY{l+s+si}{\PYZpc{}(levelname)s}\PY{l+s+s1}{ : }\PY{l+s+si}{\PYZpc{}(message)s}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{level}\PY{o}{=}\PY{n}{logging}\PY{o}{.}\PY{n}{INFO}\PY{p}{)}
+            \PY{n}{train\PYZus{}file\PYZus{}name\PYZus{}cut}\PY{o}{=}\PY{n}{cuttxt}\PY{p}{(}\PY{n}{train\PYZus{}file\PYZus{}name}\PY{p}{)}
+            \PY{n}{sentences} \PY{o}{=} \PY{n}{word2vec}\PY{o}{.}\PY{n}{Text8Corpus}\PY{p}{(}\PY{n}{train\PYZus{}file\PYZus{}name\PYZus{}cut}\PY{p}{)}  \PY{c+c1}{\PYZsh{} 加载语料}
+            \PY{n}{model} \PY{o}{=} \PY{n}{gensim}\PY{o}{.}\PY{n}{models}\PY{o}{.}\PY{n}{Word2Vec}\PY{p}{(}\PY{n}{sentences}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{n}{n\PYZus{}dim}\PY{p}{)}  \PY{c+c1}{\PYZsh{} 训练skip\PYZhy{}gram模型; 默认window=5}
+            \PY{n}{model}\PY{o}{.}\PY{n}{save}\PY{p}{(}\PY{n}{save\PYZus{}model\PYZus{}file}\PY{p}{)}
+            
+        \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}定义模型}
+        \PY{k}{def} \PY{n+nf}{get\PYZus{}model}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+            \PY{n}{embedding\PYZus{}layer} \PY{o}{=} \PY{n}{Embedding}\PY{p}{(}\PY{n}{nb\PYZus{}words}\PY{p}{,}
+                    \PY{n}{EMBEDDING\PYZus{}DIM}\PY{p}{,}
+                    \PY{n}{weights}\PY{o}{=}\PY{p}{[}\PY{n}{embedding\PYZus{}matrix}\PY{p}{]}\PY{p}{,}
+                    \PY{n}{input\PYZus{}length}\PY{o}{=}\PY{n}{MAX\PYZus{}SEQUENCE\PYZus{}LENGTH}\PY{p}{,}
+                    \PY{n}{trainable}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+        
+            \PY{n}{lstm\PYZus{}layer} \PY{o}{=} \PY{n}{LSTM}\PY{p}{(}\PY{n}{num\PYZus{}lstm}\PY{p}{,} \PY{n}{dropout}\PY{o}{=}\PY{n}{rate\PYZus{}drop\PYZus{}lstm}\PY{p}{,} \PY{n}{recurrent\PYZus{}dropout}\PY{o}{=}\PY{n}{rate\PYZus{}drop\PYZus{}lstm}\PY{p}{,}\PY{n}{return\PYZus{}sequences}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+        
+            \PY{n}{inp} \PY{o}{=} \PY{n}{Input}\PY{p}{(}\PY{n}{shape}\PY{o}{=}\PY{p}{(}\PY{n}{MAX\PYZus{}SEQUENCE\PYZus{}LENGTH}\PY{p}{,}\PY{p}{)}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{int32}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n}{embedded\PYZus{}sequences}\PY{o}{=} \PY{n}{embedding\PYZus{}layer}\PY{p}{(}\PY{n}{inp}\PY{p}{)}
+            \PY{n}{x} \PY{o}{=} \PY{n}{lstm\PYZus{}layer}\PY{p}{(}\PY{n}{embedded\PYZus{}sequences}\PY{p}{)}
+            \PY{n}{x} \PY{o}{=} \PY{n}{Dropout}\PY{p}{(}\PY{n}{rate\PYZus{}drop\PYZus{}dense}\PY{p}{)}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+            \PY{n}{merged} \PY{o}{=} \PY{n}{Attention}\PY{p}{(}\PY{n}{MAX\PYZus{}SEQUENCE\PYZus{}LENGTH}\PY{p}{)}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+            \PY{n}{merged} \PY{o}{=} \PY{n}{Dense}\PY{p}{(}\PY{n}{num\PYZus{}dense}\PY{p}{,} \PY{n}{activation}\PY{o}{=}\PY{n}{act}\PY{p}{)}\PY{p}{(}\PY{n}{merged}\PY{p}{)}
+            \PY{n}{merged} \PY{o}{=} \PY{n}{Dropout}\PY{p}{(}\PY{n}{rate\PYZus{}drop\PYZus{}dense}\PY{p}{)}\PY{p}{(}\PY{n}{merged}\PY{p}{)}
+            \PY{n}{outp} \PY{o}{=} \PY{n}{Dense}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{(}\PY{n}{merged}\PY{p}{)}
+        
+            \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}这里的参数可以修正}
+            \PY{n}{model} \PY{o}{=} \PY{n}{Model}\PY{p}{(}\PY{n}{inputs}\PY{o}{=}\PY{n}{inp}\PY{p}{,} \PY{n}{outputs}\PY{o}{=}\PY{n}{outp}\PY{p}{)}
+            \PY{n}{model}\PY{o}{.}\PY{n}{compile}\PY{p}{(}\PY{n}{loss}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mse}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                          \PY{n}{optimizer}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rmsprop}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                          \PY{n}{metrics}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mse}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+        
+            \PY{k}{return} \PY{n}{model}
+            
+        \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}   }
+        \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}命名预处理\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+        \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+        
+        \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}命名文件——训练集与测试集}
+        \PY{n}{train\PYZus{}name} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{./training\PYZhy{}inspur.csv}\PY{l+s+s2}{\PYZdq{}}
+        \PY{n}{predict\PYZus{}name} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{./Preliminary\PYZhy{}texting.csv}\PY{l+s+s2}{\PYZdq{}}
+        
+        \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}cut\PYZus{}txt——分词前文本集合}
+        \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}cut\PYZus{}txt\PYZus{}r——分词后文本词集合}
+        \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}文件编码格式为utf\PYZhy{}8}
+        \PY{n}{cut\PYZus{}txt} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./dl\PYZus{}text.txt}\PY{l+s+s1}{\PYZsq{}}
+        \PY{n}{cut\PYZus{}txt\PYZus{}r} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./dl\PYZus{}text\PYZus{}r.txt}\PY{l+s+s1}{\PYZsq{}} 
+        
+        \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}词向量模型以及特征保存路径}
+        \PY{n}{save\PYZus{}model\PYZus{}name} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./Word300.model}\PY{l+s+s1}{\PYZsq{}}
+        \PY{n}{save\PYZus{}feature} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./df\PYZus{}fea.pkl}\PY{l+s+s1}{\PYZsq{}}
+        
+        \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+        \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}实验参数设置\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+        \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+        
+        \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}w2v的特征维度}
+        \PY{n}{max\PYZus{}features} \PY{o}{=} \PY{l+m+mi}{30000}
+        \PY{n}{maxlen} \PY{o}{=} \PY{l+m+mi}{200}
+        \PY{n}{validation\PYZus{}split} \PY{o}{=} \PY{l+m+mf}{0.1}
+        
+        \PY{n}{MAX\PYZus{}SEQUENCE\PYZus{}LENGTH} \PY{o}{=} \PY{l+m+mi}{150}
+        \PY{n}{MAX\PYZus{}NB\PYZus{}WORDS} \PY{o}{=} \PY{l+m+mi}{30000}
+        \PY{n}{EMBEDDING\PYZus{}DIM} \PY{o}{=} \PY{l+m+mi}{300}
+        \PY{n}{VALIDATION\PYZus{}SPLIT} \PY{o}{=} \PY{l+m+mf}{0.1}
+        
+        \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}向量维度}
+        \PY{n}{embed\PYZus{}size} \PY{o}{=} \PY{l+m+mi}{300}
+        
+        \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}LSTM参数}
+        \PY{n}{num\PYZus{}lstm} \PY{o}{=} \PY{l+m+mi}{300}
+        \PY{n}{num\PYZus{}dense} \PY{o}{=} \PY{l+m+mi}{256}
+        \PY{n}{rate\PYZus{}drop\PYZus{}lstm} \PY{o}{=} \PY{l+m+mf}{0.25}
+        \PY{n}{rate\PYZus{}drop\PYZus{}dense} \PY{o}{=} \PY{l+m+mf}{0.25}
+        
+        \PY{n}{act} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{relu}\PY{l+s+s1}{\PYZsq{}}
+        
+        \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+        \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}读取数据\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+        \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+        \PY{n}{train} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{n}{train\PYZus{}name}\PY{p}{)}
+        \PY{n}{train\PYZus{}row} \PY{o}{=} \PY{n}{train}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+        \PY{n}{df\PYZus{}train} \PY{o}{=} \PY{n}{train}
+        \PY{n}{predict} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{n}{predict\PYZus{}name}\PY{p}{)}
+        \PY{n}{df\PYZus{}test} \PY{o}{=} \PY{n}{predict}
+        
+        
+        \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+        \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}数据预处理\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+        \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+        \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}判断w2v模型是否存在}
+        \PY{k}{if} \PY{o+ow}{not} \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{exists}\PY{p}{(}\PY{n}{save\PYZus{}model\PYZus{}name}\PY{p}{)}\PY{p}{:}
+            \PY{n}{model\PYZus{}train}\PY{p}{(}\PY{n}{cut\PYZus{}txt\PYZus{}r}\PY{p}{,} \PY{n}{save\PYZus{}model\PYZus{}name}\PY{p}{,}\PY{n}{EMBEDDING\PYZus{}DIM}\PY{p}{)}
+        \PY{k}{else}\PY{p}{:}
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{此训练模型已经存在，不用再次训练}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}加载w2v模型}
+        \PY{n}{w2v\PYZus{}model} \PY{o}{=} \PY{n}{word2vec}\PY{o}{.}\PY{n}{Word2Vec}\PY{o}{.}\PY{n}{load}\PY{p}{(}\PY{n}{save\PYZus{}model\PYZus{}name}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}判断特征是否存在：Y直接加载 N结巴分词生成特征}
+        \PY{k}{if} \PY{o+ow}{not} \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{exists}\PY{p}{(}\PY{n}{save\PYZus{}feature}\PY{p}{)}\PY{p}{:}
+            \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{concat}\PY{p}{(}\PY{p}{[}\PY{n}{df\PYZus{}train}\PY{p}{,}\PY{n}{df\PYZus{}test}\PY{p}{]}\PY{p}{)}
+            \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cut\PYZus{}discuss}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{COMMCONTENT}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{str}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{map}\PY{p}{(}\PY{k}{lambda} \PY{n}{x} \PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ }\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{i} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{jieba}\PY{o}{.}\PY{n}{cut}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+            \PY{n}{fw} \PY{o}{=} \PY{n+nb}{open}\PY{p}{(}\PY{n}{save\PYZus{}feature}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{wb}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} 
+            \PY{n}{pickle}\PY{o}{.}\PY{n}{dump}\PY{p}{(}\PY{n}{df}\PY{p}{,}\PY{n}{fw}\PY{p}{)}
+            \PY{n}{fw}\PY{o}{.}\PY{n}{close}\PY{p}{(}\PY{p}{)}
+        \PY{k}{else}\PY{p}{:}
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{特征存在，直接加载...}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+            \PY{n}{fw} \PY{o}{=} \PY{n+nb}{open}\PY{p}{(}\PY{n}{save\PYZus{}feature}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rb}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} 
+            \PY{n}{df} \PY{o}{=} \PY{n}{pickle}\PY{o}{.}\PY{n}{load}\PY{p}{(}\PY{n}{fw}\PY{p}{)}
+            \PY{n}{fw}\PY{o}{.}\PY{n}{close}\PY{p}{(}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}取出第三列的所有行}
+        \PY{n}{X\PYZus{}train} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{n}{train\PYZus{}row}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{]}
+        \PY{n}{X\PYZus{}test} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{n}{train\PYZus{}row}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{]}
+        
+        \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}Tokenizer进行词法分析}
+        \PY{n}{tokenizer} \PY{o}{=} \PY{n}{text}\PY{o}{.}\PY{n}{Tokenizer}\PY{p}{(}\PY{n}{num\PYZus{}words}\PY{o}{=}\PY{n}{MAX\PYZus{}NB\PYZus{}WORDS}\PY{p}{)}
+        \PY{n}{tokenizer}\PY{o}{.}\PY{n}{fit\PYZus{}on\PYZus{}texts}\PY{p}{(}\PY{n+nb}{list}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{)} \PY{o}{+} \PY{n+nb}{list}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{)}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}转换word下标的向量形式}
+        \PY{n}{X\PYZus{}train} \PY{o}{=} \PY{n}{tokenizer}\PY{o}{.}\PY{n}{texts\PYZus{}to\PYZus{}sequences}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{)}
+        \PY{n}{X\PYZus{}test} \PY{o}{=} \PY{n}{tokenizer}\PY{o}{.}\PY{n}{texts\PYZus{}to\PYZus{}sequences}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}将序列填充到maxlen长度}
+        \PY{n}{x\PYZus{}train} \PY{o}{=} \PY{n}{sequence}\PY{o}{.}\PY{n}{pad\PYZus{}sequences}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{maxlen}\PY{o}{=}\PY{n}{MAX\PYZus{}SEQUENCE\PYZus{}LENGTH}\PY{p}{)}
+        \PY{n}{test} \PY{o}{=} \PY{n}{sequence}\PY{o}{.}\PY{n}{pad\PYZus{}sequences}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{maxlen}\PY{o}{=}\PY{n}{MAX\PYZus{}SEQUENCE\PYZus{}LENGTH}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}训练集结果集}
+        \PY{n}{y} \PY{o}{=}\PY{n}{df\PYZus{}train}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{COMMLEVEL}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{values}
+        
+        
+        \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}找出lstm权重}
+        \PY{n}{word\PYZus{}index} \PY{o}{=} \PY{n}{tokenizer}\PY{o}{.}\PY{n}{word\PYZus{}index}
+        \PY{n}{nb\PYZus{}words} \PY{o}{=} \PY{n+nb}{min}\PY{p}{(}\PY{n}{max\PYZus{}features}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{word\PYZus{}index}\PY{p}{)}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}计算权重}
+        \PY{n}{embedding\PYZus{}matrix} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{nb\PYZus{}words}\PY{p}{,} \PY{n}{EMBEDDING\PYZus{}DIM}\PY{p}{)}\PY{p}{)}
+        \PY{k}{for} \PY{n}{word}\PY{p}{,} \PY{n}{i} \PY{o+ow}{in} \PY{n}{word\PYZus{}index}\PY{o}{.}\PY{n}{items}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+            \PY{k}{if} \PY{n}{i} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{n}{max\PYZus{}features}\PY{p}{:} 
+                \PY{k}{continue}
+            \PY{k}{else} \PY{p}{:}
+                \PY{k}{try}\PY{p}{:}
+                    \PY{n}{embedding\PYZus{}vector} \PY{o}{=} \PY{n}{w2v\PYZus{}model}\PY{p}{[}\PY{n}{word}\PY{p}{]}
+                \PY{k}{except} \PY{n+ne}{KeyError}\PY{p}{:}
+                    \PY{k}{continue}
+                \PY{k}{if} \PY{n}{embedding\PYZus{}vector} \PY{o+ow}{is} \PY{o+ow}{not} \PY{k+kc}{None}\PY{p}{:} 
+                    \PY{n}{embedding\PYZus{}matrix}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{embedding\PYZus{}vector}
+        
+        
+        
+        \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+        \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}划分训练集\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+        \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+        \PY{n}{X\PYZus{}tra}\PY{p}{,} \PY{n}{X\PYZus{}val}\PY{p}{,} \PY{n}{y\PYZus{}tra}\PY{p}{,} \PY{n}{y\PYZus{}val} \PY{o}{=} \PY{n}{train\PYZus{}test\PYZus{}split}\PY{p}{(}\PY{n}{x\PYZus{}train}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{train\PYZus{}size}\PY{o}{=}\PY{l+m+mf}{0.85}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{250}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+        \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}定义模型\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+        \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+        
+        \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}模型参数}
+        \PY{n}{model} \PY{o}{=} \PY{n}{get\PYZus{}model}\PY{p}{(}\PY{p}{)}
+        \PY{n}{STAMP} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{simple\PYZus{}lstm\PYZus{}w2v\PYZus{}vectors\PYZus{}}\PY{l+s+si}{\PYZpc{}.2f}\PY{l+s+s1}{\PYZus{}}\PY{l+s+si}{\PYZpc{}.2f}\PY{l+s+s1}{\PYZsq{}}\PY{o}{\PYZpc{}}\PY{p}{(}\PY{n}{rate\PYZus{}drop\PYZus{}lstm}\PY{p}{,}\PY{n}{rate\PYZus{}drop\PYZus{}dense}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}提前停止定义}
+        \PY{n}{early\PYZus{}stopping} \PY{o}{=}\PY{n}{EarlyStopping}\PY{p}{(}\PY{n}{monitor}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{val\PYZus{}loss}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{patience}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}保存位置}
+        \PY{n}{bst\PYZus{}model\PYZus{}path} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{./}\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n}{STAMP} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.h5}\PY{l+s+s1}{\PYZsq{}}
+        \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}保存最优}
+        \PY{n}{model\PYZus{}checkpoint} \PY{o}{=} \PY{n}{ModelCheckpoint}\PY{p}{(}\PY{n}{bst\PYZus{}model\PYZus{}path}\PY{p}{,} \PY{n}{save\PYZus{}best\PYZus{}only}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{save\PYZus{}weights\PYZus{}only}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}批尺寸64}
+        \PY{n}{batch\PYZus{}size} \PY{o}{=} \PY{l+m+mi}{64}
+        \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}迭代次数20}
+        \PY{n}{epochs} \PY{o}{=} \PY{l+m+mi}{20}
+        
+        \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+        \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}模型拟合\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+        \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+        \PY{n}{hist} \PY{o}{=} \PY{n}{model}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}tra}\PY{p}{,} \PY{n}{y\PYZus{}tra}\PY{p}{,}
+                \PY{n}{validation\PYZus{}data}\PY{o}{=}\PY{p}{(}\PY{n}{X\PYZus{}val}\PY{p}{,} \PY{n}{y\PYZus{}val}\PY{p}{)}\PY{p}{,}
+                \PY{n}{epochs}\PY{o}{=}\PY{n}{epochs}\PY{p}{,} \PY{n}{batch\PYZus{}size}\PY{o}{=}\PY{n}{batch\PYZus{}size}\PY{p}{,} \PY{n}{shuffle}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,}
+                 \PY{n}{callbacks}\PY{o}{=}\PY{p}{[}\PY{n}{early\PYZus{}stopping}\PY{p}{,}\PY{n}{model\PYZus{}checkpoint}\PY{p}{]}\PY{p}{)}
+                 
+        \PY{n}{model}\PY{o}{.}\PY{n}{load\PYZus{}weights}\PY{p}{(}\PY{n}{bst\PYZus{}model\PYZus{}path}\PY{p}{)}
+        \PY{n}{bst\PYZus{}val\PYZus{}score} \PY{o}{=} \PY{n+nb}{min}\PY{p}{(}\PY{n}{hist}\PY{o}{.}\PY{n}{history}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{val\PYZus{}loss}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+        \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}模型预测\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+        \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+        \PY{n}{y\PYZus{}test} \PY{o}{=} \PY{n}{model}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{test}\PY{p}{,} \PY{n}{batch\PYZus{}size}\PY{o}{=}\PY{l+m+mi}{256}\PY{p}{,} \PY{n}{verbose}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+        \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}结果保存\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+        \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+        \PY{n}{f} \PY{o}{=} \PY{n}{codecs}\PY{o}{.}\PY{n}{open}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{./result.txt}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{w}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{utf\PYZhy{}8}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{y\PYZus{}test}\PY{p}{:}
+            \PY{n}{f}\PY{o}{.}\PY{n}{write}\PY{p}{(}\PY{n+nb}{str}\PY{p}{(}\PY{n}{i}\PY{p}{)}\PY{o}{.}\PY{n}{strip}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{[]}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{+}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}r}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{c+c1}{\PYZsh{}\PYZbs{}r\PYZbs{}n为换行符}
+        \PY{n}{f}\PY{o}{.}\PY{n}{close}\PY{p}{(}\PY{p}{)}
+        
+        \PY{n}{b} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{loadtxt}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./result.txt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{df}\PY{o}{=}\PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{b}\PY{p}{,} \PY{n}{columns} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{COMMLEVEL}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{}参数可调优}
+        \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{y}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{=}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{COMMLEVEL}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{l+m+mi}{1} \PY{k}{if} \PY{n}{x}\PY{o}{\PYZlt{}}\PY{l+m+mf}{1.758} \PY{k}{else}\PY{p}{(}\PY{l+m+mi}{3} \PY{k}{if} \PY{n}{x}\PY{o}{\PYZgt{}}\PY{l+m+mf}{2.5726} \PY{k}{else} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{}输出结果集}
+        \PY{n}{df}\PY{o}{.}\PY{n}{to\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./dsjyycxds\PYZus{}preliminary.txt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{columns}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{n}{index} \PY{o}{=} \PY{k+kc}{False}\PY{p}{,}\PY{n}{header}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Building prefix dict from the default dictionary {\ldots}
+2018-06-28 13:56:44,836 : DEBUG : Building prefix dict from the default dictionary {\ldots}
+Dumping model to file cache C:\textbackslash{}Users\textbackslash{}a\textbackslash{}AppData\textbackslash{}Local\textbackslash{}Temp\textbackslash{}jieba.cache
+2018-06-28 13:56:46,927 : DEBUG : Dumping model to file cache C:\textbackslash{}Users\textbackslash{}a\textbackslash{}AppData\textbackslash{}Local\textbackslash{}Temp\textbackslash{}jieba.cache
+Loading model cost 2.316 seconds.
+2018-06-28 13:56:47,155 : DEBUG : Loading model cost 2.316 seconds.
+Prefix dict has been built succesfully.
+2018-06-28 13:56:47,158 : DEBUG : Prefix dict has been built succesfully.
+2018-06-28 13:56:57,586 : INFO : collecting all words and their counts
+2018-06-28 13:56:57,592 : INFO : PROGRESS: at sentence \#0, processed 0 words, keeping 0 word types
+2018-06-28 13:56:58,185 : INFO : collected 34034 word types from a corpus of 669564 raw words and 67 sentences
+2018-06-28 13:56:58,188 : INFO : Loading a fresh vocabulary
+2018-06-28 13:56:58,272 : INFO : min\_count=5 retains 8020 unique words (23\% of original 34034, drops 26014)
+2018-06-28 13:56:58,274 : INFO : min\_count=5 leaves 629398 word corpus (94\% of original 669564, drops 40166)
+2018-06-28 13:56:58,357 : INFO : deleting the raw counts dictionary of 34034 items
+2018-06-28 13:56:58,364 : INFO : sample=0.001 downsamples 39 most-common words
+2018-06-28 13:56:58,367 : INFO : downsampling leaves estimated 458211 word corpus (72.8\% of prior 629398)
+2018-06-28 13:56:58,369 : INFO : estimated required memory for 8020 words and 300 dimensions: 23258000 bytes
+2018-06-28 13:56:58,432 : INFO : resetting layer weights
+2018-06-28 13:56:58,698 : INFO : training model with 3 workers on 8020 vocabulary and 300 features, using sg=0 hs=0 sample=0.001 negative=5 window=5
+2018-06-28 13:56:59,723 : INFO : PROGRESS: at 13.13\% examples, 293207 words/s, in\_qsize 6, out\_qsize 0
+2018-06-28 13:57:00,726 : INFO : PROGRESS: at 22.39\% examples, 253032 words/s, in\_qsize 5, out\_qsize 0
+2018-06-28 13:57:01,727 : INFO : PROGRESS: at 36.72\% examples, 277901 words/s, in\_qsize 5, out\_qsize 1
+2018-06-28 13:57:02,744 : INFO : PROGRESS: at 51.34\% examples, 290642 words/s, in\_qsize 6, out\_qsize 0
+2018-06-28 13:57:03,759 : INFO : PROGRESS: at 64.78\% examples, 293202 words/s, in\_qsize 5, out\_qsize 1
+2018-06-28 13:57:04,788 : INFO : PROGRESS: at 81.49\% examples, 306778 words/s, in\_qsize 6, out\_qsize 0
+2018-06-28 13:57:05,802 : INFO : PROGRESS: at 93.43\% examples, 301300 words/s, in\_qsize 6, out\_qsize 0
+2018-06-28 13:57:06,220 : INFO : worker thread finished; awaiting finish of 2 more threads
+2018-06-28 13:57:06,241 : INFO : worker thread finished; awaiting finish of 1 more threads
+2018-06-28 13:57:06,269 : INFO : worker thread finished; awaiting finish of 0 more threads
+2018-06-28 13:57:06,271 : INFO : training on 3347820 raw words (2291445 effective words) took 7.6s, 302758 effective words/s
+2018-06-28 13:57:06,274 : INFO : saving Word2Vec object under C:/Users/a/Desktop/Python/data/Word300.model, separately None
+2018-06-28 13:57:06,278 : INFO : not storing attribute syn0norm
+2018-06-28 13:57:06,286 : INFO : not storing attribute cum\_table
+2018-06-28 13:57:06,844 : INFO : saved C:/Users/a/Desktop/Python/data/Word300.model
+2018-06-28 13:57:06,857 : INFO : loading Word2Vec object from C:/Users/a/Desktop/Python/data/Word300.model
+2018-06-28 13:57:07,217 : INFO : loading wv recursively from C:/Users/a/Desktop/Python/data/Word300.model.wv.* with mmap=None
+2018-06-28 13:57:07,219 : INFO : setting ignored attribute syn0norm to None
+2018-06-28 13:57:07,221 : INFO : setting ignored attribute cum\_table to None
+2018-06-28 13:57:07,224 : INFO : loaded C:/Users/a/Desktop/Python/data/Word300.model
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Shape of test tensor: (102024, 150)
+Total 30000 word vectors.
+x\_tra shape  (17000, 150)
+X\_val shape  (3000, 150)
+y\_tra shape  (17000,)
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+Layer (type)                 Output Shape              Param \#   
+=================================================================
+input\_1 (InputLayer)         (None, 150)               0         
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+embedding\_1 (Embedding)      (None, 150, 300)          9000000   
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+lstm\_1 (LSTM)                (None, 150, 300)          721200    
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+dropout\_1 (Dropout)          (None, 150, 300)          0         
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+attention\_1 (Attention)      (None, 300)               450       
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+dense\_1 (Dense)              (None, 256)               77056     
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+dropout\_2 (Dropout)          (None, 256)               0         
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+dense\_2 (Dense)              (None, 1)                 257       
+=================================================================
+Total params: 9,798,963
+Trainable params: 798,963
+Non-trainable params: 9,000,000
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+None
+simple\_lstm\_w2v\_vectors\_0.25\_0.25
+Train on 17000 samples, validate on 3000 samples
+Epoch 1/20
+17000/17000 [==============================] - 711s 42ms/step - loss: 0.6449 - mean\_squared\_error: 0.6449 - val\_loss: 0.4796 - val\_mean\_squared\_error: 0.4796
+Epoch 2/20
+17000/17000 [==============================] - 711s 42ms/step - loss: 0.4723 - mean\_squared\_error: 0.4723 - val\_loss: 0.4096 - val\_mean\_squared\_error: 0.4096
+Epoch 3/20
+17000/17000 [==============================] - 676s 40ms/step - loss: 0.4416 - mean\_squared\_error: 0.4416 - val\_loss: 0.3700 - val\_mean\_squared\_error: 0.3700
+Epoch 4/20
+17000/17000 [==============================] - 622s 37ms/step - loss: 0.4220 - mean\_squared\_error: 0.4220 - val\_loss: 0.4000 - val\_mean\_squared\_error: 0.4000
+Epoch 5/20
+17000/17000 [==============================] - 667s 39ms/step - loss: 0.4106 - mean\_squared\_error: 0.4106 - val\_loss: 0.3509 - val\_mean\_squared\_error: 0.3509
+Epoch 6/20
+17000/17000 [==============================] - 641s 38ms/step - loss: 0.3973 - mean\_squared\_error: 0.3973 - val\_loss: 0.3674 - val\_mean\_squared\_error: 0.3674
+Epoch 7/20
+17000/17000 [==============================] - 670s 39ms/step - loss: 0.3902 - mean\_squared\_error: 0.3902 - val\_loss: 0.3472 - val\_mean\_squared\_error: 0.3472
+Epoch 8/20
+17000/17000 [==============================] - 660s 39ms/step - loss: 0.3794 - mean\_squared\_error: 0.3794 - val\_loss: 0.3448 - val\_mean\_squared\_error: 0.3448
+Epoch 9/20
+17000/17000 [==============================] - 677s 40ms/step - loss: 0.3731 - mean\_squared\_error: 0.3731 - val\_loss: 0.3442 - val\_mean\_squared\_error: 0.3442
+Epoch 10/20
+17000/17000 [==============================] - 666s 39ms/step - loss: 0.3600 - mean\_squared\_error: 0.3600 - val\_loss: 0.3417 - val\_mean\_squared\_error: 0.3417
+Epoch 11/20
+17000/17000 [==============================] - 659s 39ms/step - loss: 0.3534 - mean\_squared\_error: 0.3534 - val\_loss: 0.3484 - val\_mean\_squared\_error: 0.3484
+Epoch 12/20
+17000/17000 [==============================] - 662s 39ms/step - loss: 0.3429 - mean\_squared\_error: 0.3429 - val\_loss: 0.3476 - val\_mean\_squared\_error: 0.3476
+Start making the submission before fine-tuning
+102024/102024 [==============================] - 1252s 12ms/step
+
+    \end{Verbatim}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
